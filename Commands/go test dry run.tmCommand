@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>command</key>
+	<string>#!/usr/bin/env bash
+
+cat &lt;&lt; EOF
+&lt;html&gt;
+&lt;body&gt;
+&lt;pre&gt;
+EOF
+
+echo "Compiling test only (dry run)..."
+TEST_BIN=$(mktemp)
+go test -c -o ${TEST_BIN} 2&gt;&amp;1
+
+if [ $? -eq 0 ]; then
+	echo "Compiled successfully!"
+	rm ${TEST_BIN}
+fi
+
+cat &lt;&lt; EOF
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>^@r</string>
+	<key>name</key>
+	<string>go test dry run</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>CC5C5DD0-EFE8-4CCD-9FE5-25113C5A4F11</string>
+</dict>
+</plist>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env bash
+
+cat &lt;&lt; EOF
+&lt;html&gt;
+&lt;body&gt;
+&lt;pre&gt;
+EOF
+
+date
+
+go install -v 2&gt;&amp;1
+if [ $? -eq 0 ]; then
+	echo "Compiled and installed successfully!"
+fi
+
+cat &lt;&lt; EOF
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF</string>
+	<key>input</key>
+	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>@i</string>
+	<key>name</key>
+	<string>go install package</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>B831EFCF-F049-4A8D-A17D-AF99499A4F5D</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

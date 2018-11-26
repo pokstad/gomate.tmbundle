@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env bash
+
+OFFSET=`offset -line ${TM_LINE_NUMBER} -column ${TM_LINE_INDEX}`
+
+cat &lt;&lt; EOF
+&lt;html&gt;
+&lt;body&gt;
+&lt;pre&gt;
+EOF
+
+echo "gogetdoc -pos ${TM_FILEPATH}:#${OFFSET}"
+gogetdoc -pos ${TM_FILEPATH}:#${OFFSET} 2&gt;&amp;1
+
+cat &lt;&lt; EOF
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+</string>
+	<key>input</key>
+	<string>document</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>@d</string>
+	<key>name</key>
+	<string>gogetdoc</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>325B708F-9400-4593-84E7-51370910E664</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

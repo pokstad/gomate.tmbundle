@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env bash
+
+cat &lt;&lt; EOF
+&lt;html&gt;
+&lt;body&gt;
+&lt;pre&gt;
+EOF
+
+date
+echo "Installing all packages in project dir: ${TM_PROJECT_DIRECTORY}"
+
+cd ${TM_PROJECT_DIRECTORY}
+NONVENDOR=$(go list ./... | grep -v vendor)
+
+go install -v $NONVENDOR 2&gt;&amp;1
+
+if [ $? -eq 0 ]; then
+	echo "Compiled and installed successfully!"
+fi
+
+cat &lt;&lt; EOF
+&lt;/pre&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF</string>
+	<key>input</key>
+	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>@I</string>
+	<key>name</key>
+	<string>go install project</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.go</string>
+	<key>uuid</key>
+	<string>85BA36F8-78CD-4710-82CF-AF54E81CEBAC</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>
